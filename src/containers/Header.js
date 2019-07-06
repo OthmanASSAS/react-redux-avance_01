@@ -1,29 +1,43 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actions from '../actions'
+import { setAuthentification } from '../actions'
+import {Link} from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ isLoggedIn, setAuthentification }) => {
+    const onAuth = () => {
+        setAuthentification(!isLoggedIn)
+    }
+
+    const renderAuthLabel = isLoggedIn ? 'DECONNEXION' : 'CONNEXION'
+
+
     return (
         <div>
             <ul className="nav nav-tabs bg-primary">
                 <li className="nav-item">
-                    <a href="#" className="nav-link">Accueil</a>
+                    <Link to="/" className="nav-link">
+                        Accueil
+                        </Link>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">Ressources</a>
+                    <Link to="/ressources" className="nav-link">
+                        Ressources
+                        </Link>
                 </li>
                 <li className="nav-item">
-                    <a href="#" className="nav-link">Connexion</a>
+                    <a href="#" className="nav-link" onClick={onAuth}>
+                        {renderAuthLabel}
+                    </a>
                 </li>
             </ul>
-          
+
         </div>
     );
 };
 
 const mapStateToProps = state => ({
-
+    isLoggedIn: state.auth.isLoggedIn
 })
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps, { setAuthentification })(Header);
