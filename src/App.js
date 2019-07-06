@@ -1,16 +1,14 @@
-import React from 'react';
-import {Provider} from 'react-redux';
-import store from './store'
+import React, { Fragment } from 'react';
+import Header from './containers/Header'
 import './App.css';
 
-const App = ()=> {
+const App = () => {
   return (
-    <Provider store={store}>
 
-    <div>
-      React redux boiler plate
-    </div>
-    </Provider>
+    <Fragment>
+      <Header />
+    </Fragment>
+
   );
 }
 
